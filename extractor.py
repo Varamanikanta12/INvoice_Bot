@@ -18,5 +18,29 @@ def extract_text(file_path):
 
     print("Text extracted...")
     return text
+def get_structured_data(text):
+    
+    prompt = f"""
+Extract invoice details.
 
+Return JSON only:
+{{
+  "items": [{{"description": "", "amount": number}}],
+  "base_amount": number,
+  "grand_total": number
+}}
+
+Invoice:
+{text}
+"""
+
+    res = llm.invoke([HumanMessage(content=prompt)])
+
+    try:
+        data = json.loads(res.content)
+        print("Structured data ready")
+        return data
+    except:
+        print("JSON parsing failed")
+        return {"error": res.content}
 
