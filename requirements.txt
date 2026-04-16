@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+streamlit
+unstructured[pdf]
+langchain
+langchain-groq
+python-multipart
+requests
+pypdf
